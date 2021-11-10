@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Smart.Servico.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Smart.Servico.Api.Controllers.AcessoController">
+            <summary>
+            Classe onde é usado para o acesso efetivo ou seja, quando efetivamente a um acesso de saída ou entrada.
+            </summary>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.AcessoController.#ctor(Smart.Aplicacao.Interfaces.IAcessoApp,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Smart.Servico.Api.Controllers.AcessoController})">
+            <summary>
+            Classe onde é usado para o acesso efetivo ou seja, quando efetivamente a um acesso de saída ou entrada.
+            </summary>
+            <param name="app"></param>
+            <param name="config"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Smart.Servico.Api.Controllers.FiltroDatas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.ControllerBase`2.Listar">
+            <summary>
+            Retorna uma lista de registros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.ControllerBase`2.SelecionarPorId(System.Int32)">
+            <summary>
+            Retorna o registro selecionado pelo identificador
+            </summary>
+            <param name="id"></param>
+            <returns>Object</returns>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.ControllerBase`2.Incluir(`1)">
+            <summary>
+            Inclui novos registros e retorna o identificador
+            </summary>
+            <param name="dado"></param>
+            <returns>int</returns>
+            <response code="200">Recurso criado com sucesso</response>
+            <response code="400">Requisição mal formatada</response>
+            <response code="401">Usuário não autenticado ou autenticação inválida</response>
+            <response code="403">Usuário não tem permissão de acesso ao recurso</response>
+            <response code="422">Erro(s) de validação da camada de negócio</response>
+            <response code="403">Usuário não tem permissão de acesso ao recurso</response>
+            <response code="500">Erro interno no servidor</response>
+            <response code="503">Serviço indisponível</response>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.ControllerBase`2.Alterar(`1)">
+            <summary>
+            Faz a alteração dos registros
+            </summary>
+            <param name="dado"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Smart.Servico.Api.Controllers.ControllerBase`2.Excluir(System.Int32)">
+            <summary>
+            Exclui fisicamente o registro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Smart.Servico.Api.Extensao.DateTimeExtensions.ToFolderName(System.DateTime,System.String)">
+            <summary>
+            Retorna esta data como um texto indicando ano/mês/dia 
+            </summary>
+            <param name="value"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
