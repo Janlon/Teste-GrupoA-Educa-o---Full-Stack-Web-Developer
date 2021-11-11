@@ -148,7 +148,7 @@
                     return errors
                 }
 
-                (this.editedItem.ra == "")
+                if(this.editedItem.ra == "")
                 {
                     errors.push('RA é obrigatório')
                     return errors
@@ -230,16 +230,16 @@
             dialog: false,
             dialogDelete: false,
             headers: [    
-                { text: 'RA', value: 'ra', sortable: true },
+                { text: 'RA', value: 'ra', sortable: true, editable: false },
                 { text: 'Nome', value: 'nome', sortable: true },
                 { text: 'Email', value: 'email', sortable: true },
                 { text: 'CPF', value: 'cpf', sortable: true },
-                { text: 'Ações', value: 'actions', sortable: false },
+                { text: 'Ações', value: 'actions', sortable: false }
             ],
             alunos: [],
             editedIndex: -1,
-            editedItem: {nome: '', email: ''},
-            defaultItem: {ra:'', nome: '', email: '', cpf: ''}
+            editedItem: {ra:'', nome: '', email: '', cpf: ''},
+            defaultItem: { id:0, ra:'', nome: '', email: '', cpf: ''}
         }),
         mounted() { api.get('Aluno').then(response => {
                         this.alunos = response.data;

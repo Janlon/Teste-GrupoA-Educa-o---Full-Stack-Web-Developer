@@ -67,8 +67,8 @@ namespace Teste.Services.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geca.Servico.Api v1"));
+                
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Teste.Services.Api v1"));
             }
 
             var supportedCultures = new[] { new CultureInfo("pt-BR") };
@@ -78,7 +78,7 @@ namespace Teste.Services.Api
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
-
+            app.UseSwagger();
             app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseRouting();
