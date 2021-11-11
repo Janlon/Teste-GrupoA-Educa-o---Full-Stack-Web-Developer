@@ -20,5 +20,7 @@ namespace Teste.Domain.Entities
             set => _Email = !string.IsNullOrEmpty(value) ? value.ToLower() : value;
         }
         public string CPF { get; set; }
+
+        public string RA { get; set; }
     }
 }

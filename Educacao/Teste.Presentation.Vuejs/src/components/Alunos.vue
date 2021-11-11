@@ -7,7 +7,7 @@
             </v-card-title>
         </v-card>
 
-        <v-data-table :headers="headers" :items="alunos" :search="search" sort-by="nome" class="elevation-1">
+        <v-data-table :headers="headers" :items="alunos" :search="search" sort-by="ra" class="elevation-1">
             <template v-slot:top>
 
                 <v-toolbar flat>
@@ -29,13 +29,16 @@
                                     <v-hover>
                                         <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.nome" :error-messages="nameErrors" required label="Nome"></v-text-field>
+                                            <v-text-field v-model="editedItem.nome" :error-messages="nomeErrors" required label="Nome"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedItem.email" :error-messages="emailErrors" required label="Email" ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.cpf" required label="CPF"></v-text-field>
+                                            <v-text-field v-model="editedItem.cpf" :error-messages="cpfErrors" required label="CPF"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedItem.ra" :error-messages="raErrors" required label="Registro Acadêmico"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-card-actions>
@@ -77,6 +80,7 @@
 </template>
 
 <script>
+
     import api from '@/services/api.js';
     import { required, maxLength, email } from 'vuelidate/lib/validators'
 
@@ -86,7 +90,7 @@
             initialize () {
                 this.alunos = []
             },
-            editItem (item) {
+            editItem (item) {          
                 this.editedIndex = this.alunos.indexOf(item)
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
@@ -107,6 +111,7 @@
                 }
             },
             close () {
+                this.$v.$reset()
                 this.dialog = false
                 this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
@@ -121,6 +126,34 @@
                 })
             },
             save () {
+
+                this.$v.$touch()
+                let errors = []
+
+                if(this.editedItem.nome == "")
+                {
+                    errors.push('Nome é obrigatório.')
+                    return errors
+                }
+
+                if(this.editedItem.email == "")
+                {
+                    errors.push('E-mail é obrigatório')
+                    return errors
+                }
+
+                if(this.editedItem.cpf == "")
+                {
+                    errors.push('CPF é obrigatório')
+                    return errors
+                }
+
+                (this.editedItem.ra == "")
+                {
+                    errors.push('RA é obrigatório')
+                    return errors
+                }
+
                 if (this.editedIndex > -1) 
                 {
                     api.put("Aluno", this.editedItem).then(() => {
@@ -137,22 +170,25 @@
                         });
                     }); 
                 }
+                this.$v.$reset()
                 this.close();
-            },       
+            }     
         },
         validations: {
-            name: { required, maxLength: maxLength(300) },
-            email: { required, email , maxLength: maxLength(256) }
+            nome: { required, maxLength: maxLength(300) },
+            email: { required, email , maxLength: maxLength(256) },
+            cpf: { required, maxLength: maxLength(14) },
+            ra: { required, maxLength: maxLength(14) }
         },
         computed: {
             formTitle () {
                 return this.editedIndex === -1 ? 'Cadastrar aluno' : 'Editar registro'
             },
-             nameErrors () {
+             nomeErrors () {
                 const errors = []
-                if (!this.$v.name.$dirty) return errors
-                !this.$v.name.maxLength && errors.push('Nome possui mais de 300 caracteres')
-                !this.$v.name.required && errors.push('Nome é obrigatório.')
+                if (!this.$v.nome.$dirty) return errors
+                !this.$v.nome.maxLength && errors.push('Nome possui mais de 300 caracteres')
+                !this.$v.nome.required && errors.push('Nome é obrigatório.')
                 return errors
             },
             emailErrors () {
@@ -161,6 +197,20 @@
                 !this.$v.email.email && errors.push('Email inválido')
                 !this.$v.email.maxLength && errors.push('Email possui mais de 256 caracteres')
                 !this.$v.email.required && errors.push('E-mail é obrigatório')
+                return errors
+            },
+            cpfErrors () {
+                const errors = []
+                if (!this.$v.cpf.$dirty) return errors
+                !this.$v.cpf.maxLength && errors.push('CPF possui mais de 14 caracteres')
+                !this.$v.cpf.required && errors.push('CPF é obrigatório')
+                return errors
+            },
+            raErrors () {
+                const errors = []
+                if (!this.$v.ra.$dirty) return errors
+                !this.$v.ra.maxLength && errors.push('RA possui mais de 14 caracteres')
+                !this.$v.ra.required && errors.push('RA é obrigatório')
                 return errors
             }
         },
@@ -179,21 +229,21 @@
             search: '',
             dialog: false,
             dialogDelete: false,
-            headers: [
-                { text: 'Registo Acadêmico', align: 'start', sortable: true, value: 'id'},
-                { text: 'Nome', value: 'nome' },
-                { text: 'Email', value: 'email' },
-                { text: 'CPF', value: 'cpf' },
+            headers: [    
+                { text: 'RA', value: 'ra', sortable: true },
+                { text: 'Nome', value: 'nome', sortable: true },
+                { text: 'Email', value: 'email', sortable: true },
+                { text: 'CPF', value: 'cpf', sortable: true },
                 { text: 'Ações', value: 'actions', sortable: false },
             ],
             alunos: [],
             editedIndex: -1,
-            editedItem: {nome: '', email: '', cpf: ''},
-            defaultItem: {id:0, nome: '', email: '', cpf: ''},
+            editedItem: {nome: '', email: ''},
+            defaultItem: {ra:'', nome: '', email: '', cpf: ''}
         }),
         mounted() { api.get('Aluno').then(response => {
                         this.alunos = response.data;
-                    })
-            }
+                        })
+                    }
     }
 </script>

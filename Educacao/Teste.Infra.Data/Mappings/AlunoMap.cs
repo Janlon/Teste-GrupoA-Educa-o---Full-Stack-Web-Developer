@@ -9,12 +9,15 @@ namespace Teste.Infra.Data.Mappings
         public override void Configure(EntityTypeBuilder<Aluno> modelBuilder)
         {
             modelBuilder.ToTable("Alunos");
-            modelBuilder.HasIndex(c => c.CPF).IsUnique(true).HasFilter(null);
-            modelBuilder.HasIndex(c => c.Email).IsUnique(true).HasFilter(null);
 
             modelBuilder.Property(t => t.Nome).IsRequired().HasMaxLength(300);
             modelBuilder.Property(t => t.CPF).IsRequired().HasMaxLength(14);
             modelBuilder.Property(t => t.Email).IsRequired().HasMaxLength(256);
+            modelBuilder.Property(t => t.RA).IsRequired().HasMaxLength(14);
+
+            modelBuilder.HasIndex(c => c.CPF).IsUnique(true).HasFilter(null);
+            modelBuilder.HasIndex(c => c.Email).IsUnique(true).HasFilter(null);
+            modelBuilder.HasIndex(c => c.RA).IsUnique(true).HasFilter(null);
 
             base.Configure(modelBuilder);
         }
