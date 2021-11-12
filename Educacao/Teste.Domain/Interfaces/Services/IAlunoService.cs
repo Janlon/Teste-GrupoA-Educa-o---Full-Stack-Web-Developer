@@ -4,5 +4,6 @@ namespace Teste.Domain.Interfaces.Services
 {
     public interface IAlunoService : IBaseService<Aluno>
     {
+
     }
 }

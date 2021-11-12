@@ -8,7 +8,6 @@ namespace Teste.Domain.Services
     {
         public AlunoService(IAlunoRepositorie repositorie) : base(repositorie)
         {
-
         }
     }
 }

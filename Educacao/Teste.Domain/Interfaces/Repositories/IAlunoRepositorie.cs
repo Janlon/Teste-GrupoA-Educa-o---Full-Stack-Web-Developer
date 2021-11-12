@@ -5,4 +5,5 @@ namespace Teste.Domain.Interfaces.Repositories
     public interface IAlunoRepositorie : IBaseRepositorie<Aluno>
     {
     }
+
 }

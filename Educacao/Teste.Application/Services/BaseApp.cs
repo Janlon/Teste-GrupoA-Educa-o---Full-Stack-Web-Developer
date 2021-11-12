@@ -49,5 +49,14 @@ namespace Teste.Application.Services
             return iMapper.Map<TEntidadeDTO>(service.GetId(id));
         }
 
+        public bool FindCpf(string cpf)
+        {
+            return iMapper.Map<TEntidadeDTO>(service.FindCpf(cpf)) != null;
+        }
+
+        public bool FindRa(string ra)
+        {
+            return iMapper.Map<TEntidadeDTO>(service.FindRa(ra)) != null;
+        }
     }
 }

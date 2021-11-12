@@ -12,6 +12,8 @@ namespace Teste.Application.Interfaces
         void Edit(TEntitieDTO entitieDTO);
         TEntitieDTO GetId(int id);
         IEnumerable<TEntitieDTO> GetAll();
+        bool FindCpf(string cpf);
+        bool FindRa(string ra);
     }
 }
 

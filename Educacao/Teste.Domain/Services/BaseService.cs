@@ -43,5 +43,15 @@ namespace Teste.Domain.Services
         {
             return repositorie.GetId(id);
         }
+
+        public bool FindCpf(string cpf)
+        {
+            return repositorie.FindCpf(cpf);
+        }
+
+        public bool FindRa(string ra)
+        {
+            return repositorie.FindRa(ra);
+        }
     }
 }

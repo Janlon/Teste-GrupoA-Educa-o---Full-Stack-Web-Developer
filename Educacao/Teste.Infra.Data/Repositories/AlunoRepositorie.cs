@@ -1,4 +1,5 @@
-﻿using Teste.Domain.Entities;
+﻿using System.Linq;
+using Teste.Domain.Entities;
 using Teste.Domain.Interfaces.Repositories;
 using Teste.Infra.Data.Contexts;
 

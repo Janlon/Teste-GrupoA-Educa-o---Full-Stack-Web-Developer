@@ -53,5 +53,14 @@ namespace Teste.Infra.Data.Repositories
         {
             return Context.Set<T>().Find(id);
         }
+       public bool FindCpf(string cpf)
+        {
+            return Context.Set<Aluno>().Where(p => p.CPF.Equals(cpf)) != null;
+        }
+
+        public bool FindRa(string ra)
+        {
+            return Context.Set<Aluno>().Where(p => p.RA.Equals(ra)) != null;
+        }
     }
 }

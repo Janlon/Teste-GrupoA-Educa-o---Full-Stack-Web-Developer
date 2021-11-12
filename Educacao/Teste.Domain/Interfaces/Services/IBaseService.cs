@@ -11,5 +11,7 @@ namespace Teste.Domain.Interfaces.Services
         void Edit(T entitie);
         T GetId(int id);
         IEnumerable<T> GetAll();
+        bool FindCpf(string cpf);
+        bool FindRa(string ra);
     }
 }
